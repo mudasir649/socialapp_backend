@@ -8,6 +8,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import multer from "multer";
 import { fileURLToPath } from "url";
+import dbConnection from "./utils/dbConnection.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
@@ -22,14 +23,11 @@ app.use(bodyParser.urlencoded({ limit:"30mb", extended: true }));
 app.use(cors());
 app.use("/assest", express.static(path.join(__dirname, 'public/assets')));
 
-/* file storage */
-const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, "public/assets");
-    },
-    filename: function(req, file, cb){
-        cb(null, file.originalname)
-    }
+app.use((next) => {
+    dbConnection();
+    next();
 })
 
-const upload = multer({ storage })
+app.listen(process.env.BACKEND_PORT, () => {
+    console.log(`APP running at port ${process.env.BACKEND_PORT}`);
+})

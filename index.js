@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 import multer from "multer";
 import { fileURLToPath } from "url";
 import dbConnection from "./utils/dbConnection.js";
+import authRoutes from "./routes/authRoutes.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
@@ -27,6 +28,8 @@ app.use((next) => {
     dbConnection();
     next();
 })
+
+app.use("/auth", authRoutes)
 
 app.listen(process.env.BACKEND_PORT, () => {
     console.log(`APP running at port ${process.env.BACKEND_PORT}`);

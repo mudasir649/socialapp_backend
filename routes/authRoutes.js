@@ -1,6 +1,7 @@
 import express from "express";
 import storage from "../utils/storage";
 import multer from "multer";
+import { register } from "../controller/auth.controller";
 
 const router = express.Router();
 
@@ -15,4 +16,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.get('/').post("/register", upload.single("picture"), register)
+router.post('/login').post("/register", upload.single("picture"), register);
+
+export default router;

@@ -38,7 +38,7 @@ const register = async(req, res) => {
             return successResponse(res, "User is registered successfully.", true, savedUser);
         }
     } catch (error) {
-        return unexpectedResponse(res, error, false)
+        return unexpectedResponse(res, error.message, false)
     }
 }
 
@@ -54,7 +54,7 @@ const login = async(req, res) => {
         delete user.password;
         return successResponse(res, "You are loggedIn", true, { token, user })
     } catch (error) {
-        return unexpectedResponse(res, error, false)
+        return unexpectedResponse(res, error.message, false)
     }
 }
 

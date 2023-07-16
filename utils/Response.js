@@ -1,7 +1,8 @@
 export const successResponse = async (res, message, success, data) => {
-  return res
-    .statsu(201)
-    .json({ message: message, success: success, data: data });
+  return res.status(200).json({
+    message: message, 
+    success: success, 
+    data: data });zvc 
 };
 
 export const failedResponse = async (res, message, success) => {
@@ -16,8 +17,8 @@ export const deniedResponse = async () => {
 }
 
 
-export const unexpectedResponse = async (res, message, success) => {
-    return res.status(500).json({
+export const unexpectedResponse = async (res, message, status, success) => {
+    return res.status(status).json({
       message: message,
       success: success,
     });

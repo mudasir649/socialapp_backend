@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import { deniedResponse, successResponse, unexpectedResponse } from "../utils/Response";
-import config from "../config/config";
+import { deniedResponse, successResponse, unexpectedResponse } from "../utils/Response.js";
+import config from "../config/config.js";
 
 export const verifyToken = async (req, res, next) => {
     try {
